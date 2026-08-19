@@ -1,7 +1,7 @@
 # Integrating `.kaspa` names into a wallet
 
 This guide is for wallet and app developers adding KNS name display and resolution. The reference
-consumer is this repo's SDK (`npm i kaspa-names`), but everything here is implementable directly
+consumer is this repo's SDK (`npm i @kronsdk/kaspa-names`), but everything here is implementable directly
 against the HTTP API — the SDK is a convenience, not a requirement.
 
 ## What KNS is (one paragraph)
@@ -19,7 +19,7 @@ requires trusting the API operator (see **Verification**).
 When the user types something ending in `.kaspa` (or any valid name) as a payment destination:
 
 ```ts
-import { KnsClient } from 'kaspa-names';
+import { KnsClient } from '@kronsdk/kaspa-names';
 const kns = new KnsClient();
 
 const r = await kns.resolve(userInput);        // normalizes internally; null = no resolution
@@ -109,7 +109,7 @@ Sompi amounts are decimal strings — `BigInt(...)` before arithmetic.
 You never have to take the API's word:
 
 1. `GET /v1/names/{name}/proof` → the name's current redeem preimage + outpoint.
-2. `verifyProof(name, proof)` from `kaspa-names/verify` checks offline that the redeem provably
+2. `verifyProof(name, proof)` from `@kronsdk/kaspa-names/verify` checks offline that the redeem provably
    encodes this exact name (`nameId = blake2b-256(name)`) and hashes to the claimed script
    (`'aa20' + blake2b256(redeem) + '87'`).
 3. Ask **any Kaspa node** whether that outpoint is a live UTXO with exactly that scriptPublicKey

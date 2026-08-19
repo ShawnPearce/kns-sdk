@@ -8,13 +8,13 @@ Zero-dependency resolution core; one small dependency (`@noble/hashes`) used onl
 on-chain proof verifier.
 
 ```
-npm install kaspa-names
+npm install @kronsdk/kaspa-names
 ```
 
 ## Quick start
 
 ```ts
-import { KnsClient } from 'kaspa-names';
+import { KnsClient } from '@kronsdk/kaspa-names';
 
 const kns = new KnsClient();
 
@@ -47,8 +47,8 @@ Full wallet-integration guidance (trust model, settling semantics, caching, veri
 | `proof(name)` | on-chain proof bundle | `null` |
 | `status()` | indexer/network status | throws |
 
-Plus pure helpers: `normalizeName`, `tierOf` (subpath `kaspa-names/normalize`, zero deps) and
-`verifyProof`, `nameIdOf` (subpath `kaspa-names/verify`).
+Plus pure helpers: `normalizeName`, `tierOf` (subpath `@kronsdk/kaspa-names/normalize`, zero deps) and
+`verifyProof`, `nameIdOf` (subpath `@kronsdk/kaspa-names/verify`).
 
 ## The one rule you must not break: normalization
 
@@ -73,7 +73,7 @@ the redeem provably encodes the name you asked about; the final step — that th
 UTXO with exactly that script — can be checked against **any Kaspa node** you trust.
 
 ```ts
-import { verifyProof } from 'kaspa-names/verify';
+import { verifyProof } from '@kronsdk/kaspa-names/verify';
 
 const proof = await kns.proof('shawn');
 const check = verifyProof('shawn', proof);   // { ok: true } or { ok: false, error }
