@@ -45,8 +45,13 @@ export class KnsClient {
   constructor(opts: KnsClientOptions = {}) {
     this.base = (opts.baseUrl ?? DEFAULT_BASE_URL).replace(/\/+$/, '');
     this.timeoutMs = opts.timeoutMs ?? 10_000;
-    this.f = opts.fetch ?? globalThis.fetch;
-    if (!this.f) throw new Error('no fetch available — pass options.fetch');
+    const f = opts.fetch ?? globalThis.fetch;
+    if (!f) throw new Error('no fetch available — pass options.fetch');
+    // Bind the default: browsers' native fetch throws "Illegal invocation" when invoked with any
+    // receiver other than the global — exactly what `this.f(...)` does with a bare reference.
+    // Node's fetch ignores the receiver, so only browser callers ever hit this. A caller-supplied
+    // fetch is used exactly as given; its binding is the caller's concern.
+    this.f = opts.fetch ?? f.bind(globalThis);
   }
 
   private async get<T>(path: string, missingOk: false): Promise<T>;

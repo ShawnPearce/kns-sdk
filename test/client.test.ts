@@ -62,3 +62,27 @@ test('reverse URL-encodes the address', async () => {
   await kns.reverse('kaspa:qz5enng5');
   assert.ok(calls[0].includes('/v1/reverse/kaspa%3Aqz5enng5'));
 });
+
+test('default fetch survives a receiver-strict runtime (browser "Illegal invocation")', async () => {
+  // Browsers' native fetch throws "Illegal invocation" when called with any receiver other than the
+  // global — which is what a bare stored reference gets when invoked as `this.f(...)`. Node's fetch
+  // ignores its receiver, so this strict stand-in reproduces the browser contract the constructor
+  // must satisfy by binding the default. Regression for the 0.1.0 bug found via the KRON integration.
+  const real = globalThis.fetch;
+  globalThis.fetch = function (this: unknown) {
+    if (this !== undefined && this !== globalThis) {
+      throw new TypeError("Failed to execute 'fetch' on 'Window': Illegal invocation");
+    }
+    return Promise.resolve({
+      ok: true, status: 200,
+      json: async () => ({ address: 'kaspa:qq0', name: 'shawn', display: 'shawn.kaspa', covid: 'aa' }),
+    } as Response);
+  } as typeof globalThis.fetch;
+  try {
+    const kns = new KnsClient();
+    const r = await kns.reverse('kaspa:qq0');
+    assert.equal(r?.display, 'shawn.kaspa');
+  } finally {
+    globalThis.fetch = real;
+  }
+});

@@ -1,6 +1,6 @@
 {
   "name": "@kronsdk/kaspa-names",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Resolve .kaspa names — read-only SDK for the KNS covenant-backed name service on Kaspa L1 (forward/reverse resolution, profiles, canonical normalization, on-chain proof verification).",
   "license": "Apache-2.0",
   "type": "module",
