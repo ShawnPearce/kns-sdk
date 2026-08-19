@@ -1,0 +1,161 @@
+{
+  "_": "Canonical .kaspa name normalization vectors. Generated from the KNS repo corpus (scripts/verify-norm.mjs) — do not hand-edit; regenerate from the KNS repo with `npm run sdk:vectors`. A conforming normalize() must map every `input` to `canonical` (null = reject).",
+  "suffix": ".kaspa",
+  "maxLen": 32,
+  "cases": [
+    {
+      "input": "kaspa",
+      "canonical": "kaspa"
+    },
+    {
+      "input": "KASPA",
+      "canonical": "kaspa"
+    },
+    {
+      "input": "Kaspa.kaspa",
+      "canonical": "kaspa"
+    },
+    {
+      "input": "kaspa.kaspa",
+      "canonical": "kaspa"
+    },
+    {
+      "input": "kaspa.kaspa.kaspa",
+      "canonical": null
+    },
+    {
+      "input": "k",
+      "canonical": "k"
+    },
+    {
+      "input": "9",
+      "canonical": "9"
+    },
+    {
+      "input": "a-b",
+      "canonical": "a-b"
+    },
+    {
+      "input": "a--b",
+      "canonical": "a--b"
+    },
+    {
+      "input": "-ab",
+      "canonical": null
+    },
+    {
+      "input": "ab-",
+      "canonical": null
+    },
+    {
+      "input": "ab-.kaspa",
+      "canonical": null
+    },
+    {
+      "input": "",
+      "canonical": null
+    },
+    {
+      "input": ".kaspa",
+      "canonical": null
+    },
+    {
+      "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "canonical": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "canonical": null
+    },
+    {
+      "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.kaspa",
+      "canonical": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "input": "under_score",
+      "canonical": null
+    },
+    {
+      "input": "with space",
+      "canonical": null
+    },
+    {
+      "input": " kaspa",
+      "canonical": null
+    },
+    {
+      "input": "kaspa ",
+      "canonical": null
+    },
+    {
+      "input": "KΑSPA",
+      "canonical": null
+    },
+    {
+      "input": "ｋａｓｐａ",
+      "canonical": "kaspa"
+    },
+    {
+      "input": "½",
+      "canonical": null
+    },
+    {
+      "input": "káspa",
+      "canonical": null
+    },
+    {
+      "input": "KASPA.KASPA",
+      "canonical": "kaspa"
+    },
+    {
+      "input": "xn--espaol-zwa",
+      "canonical": "xn--espaol-zwa"
+    },
+    {
+      "input": "0",
+      "canonical": "0"
+    },
+    {
+      "input": "a.b",
+      "canonical": null
+    },
+    {
+      "input": "💎",
+      "canonical": null
+    },
+    {
+      "input": "kaspa​",
+      "canonical": null
+    },
+    {
+      "input": "ka-spa-99",
+      "canonical": "ka-spa-99"
+    }
+  ],
+  "tiers": [
+    {
+      "name": "a",
+      "tier": 1
+    },
+    {
+      "name": "ab",
+      "tier": 2
+    },
+    {
+      "name": "abc",
+      "tier": 3
+    },
+    {
+      "name": "abcd",
+      "tier": 4
+    },
+    {
+      "name": "abcde",
+      "tier": 5
+    },
+    {
+      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tier": 5
+    }
+  ]
+}
